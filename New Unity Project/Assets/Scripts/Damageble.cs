@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Damageble : MonoBehaviour
 {
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,24 +18,18 @@ public class Damageble : MonoBehaviour
         
     }
 
-    void ReloadLevel()
+
+    public delegate void GetDamage();
+    public event GetDamage DamageDoneEvent;
+
+    void OnCollisionEnter2D(Collider2D obj)
     {
-        Application.LoadLevel(Application.loadedLevel);
-
-    }
-
-    void OnTriggerEnter2D(Collider2D obj)
+        var component = obj.gameObject.GetComponent<HerosHP>();
+        if (component != null)
         {
-            var component = obj.gameObject.GetComponent<hero>();
-            if (component != null)
-            {
-            // ReloadLevel();
-            GlobalVariable.Life = GlobalVariable.Life - 25;
-                if (GlobalVariable.Life <= 0)
-                {
-                    ReloadLevel();
-                }
-            }
+            DamageDoneEvent(); 
         }
-
     }
+
+}
+

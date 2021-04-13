@@ -24,11 +24,14 @@ public class hero : MonoBehaviour
             Jump();
         }
         if (Input.GetAxis("Horizontal") == 0)
-        { anim.SetInteger("anim_numb", 0); }
+        {
+            anim.SetInteger("anim_numb", 0);
+        }
         else
-        { anim.SetInteger("anim_numb", 1); }
+        {
+            anim.SetInteger("anim_numb", 1);
+        }
         Flip();
-        OnGUI();
     }
 
     void FixedUpdate()
@@ -58,29 +61,12 @@ public class hero : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D obj)
     {
-        // var component = obj.gameObject.GetComponent<Damageble>();
-        // if (component != null)
-        // {
-        // ReloadLevel();
-        // Life = Life - 25;
-        // if (Life <= 0)
-        // ReloadLevel();
-        // }
 
     }
 
     void OnTriggerEnter2D(Collider2D obj)
-    {
-        var component = obj.gameObject.GetComponent<Heal>();
-        if (component != null)
-            {
-            // ReloadLevel();
-            GlobalVariable.Life = GlobalVariable.Life + 50;
-                if (GlobalVariable.Life >= 100)
-                GlobalVariable.Life = 100;
-                Destroy(obj.gameObject);
-            }
 
+    { 
         if (obj.gameObject.tag == "Finish")
             {
                  Application.LoadLevel("Scene2");
@@ -88,8 +74,4 @@ public class hero : MonoBehaviour
             }
     }
 
-    void OnGUI()
-    {
-        GUI.Box(new Rect(0, 0, 100, 30), "Life=" + GlobalVariable.Life);
-    }
 }

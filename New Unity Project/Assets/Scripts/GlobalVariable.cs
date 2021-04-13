@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class GlobalVariable : MonoBehaviour
 {
-    public static int Life = 100;
+    public int _Life = 100;
+
+    
 }
