@@ -59,7 +59,8 @@ public class hero : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D obj)
     {
-        if (obj.gameObject.tag == "knife")
+        var component = obj.gameObject.GetComponent<Damageble>();
+        if (component != null)
         {
             // ReloadLevel();
             Life = Life - 25;
@@ -71,7 +72,8 @@ public class hero : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D obj)
     {
-        if (obj.gameObject.tag == "heal")
+        var component = obj.gameObject.GetComponent<Heal>();
+        if (component != null)
         {
             // ReloadLevel();
             Life = Life + 50;
