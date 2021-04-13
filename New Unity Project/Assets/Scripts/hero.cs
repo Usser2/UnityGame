@@ -6,9 +6,8 @@ using UnityEngine.SceneManagement;
 public class hero : MonoBehaviour
 {
     Rigidbody2D rb;
-    int Life = 100;
     Animator anim;
-    
+    public int Live = 120;
 
     // Start is called before the first frame update
     void Start()
@@ -51,22 +50,22 @@ public class hero : MonoBehaviour
             transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
 
-    void ReloadLevel()
-    {
-        Application.LoadLevel(Application.loadedLevel);
-
-    }
+   // void ReloadLevel()
+   // {
+   //     Application.LoadLevel(Application.loadedLevel);
+   //
+   // }
 
     void OnCollisionEnter2D(Collision2D obj)
     {
-        var component = obj.gameObject.GetComponent<Damageble>();
-        if (component != null)
-        {
-            // ReloadLevel();
-            Life = Life - 25;
-            if (Life <= 0)
-                ReloadLevel();
-        }
+        // var component = obj.gameObject.GetComponent<Damageble>();
+        // if (component != null)
+        // {
+        // ReloadLevel();
+        // Life = Life - 25;
+        // if (Life <= 0)
+        // ReloadLevel();
+        // }
 
     }
 
@@ -74,24 +73,23 @@ public class hero : MonoBehaviour
     {
         var component = obj.gameObject.GetComponent<Heal>();
         if (component != null)
-        {
+            {
             // ReloadLevel();
-            Life = Life + 50;
-            if (Life >= 100)
-                Life = 100;
-            Destroy(obj.gameObject);
+            GlobalVariable.Life = GlobalVariable.Life + 50;
+                if (GlobalVariable.Life >= 100)
+                GlobalVariable.Life = 100;
+                Destroy(obj.gameObject);
+            }
 
         if (obj.gameObject.tag == "Finish")
             {
                  Application.LoadLevel("Scene2");
                 // SceneManager.LoadScene("Scene2");
             }
-        }
-
     }
 
     void OnGUI()
     {
-        GUI.Box(new Rect(0, 0, 100, 30), "Life=" + Life);
+        GUI.Box(new Rect(0, 0, 100, 30), "Life=" + GlobalVariable.Life);
     }
 }
